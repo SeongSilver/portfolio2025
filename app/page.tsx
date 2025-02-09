@@ -1,10 +1,11 @@
 "use client";
-import Contact from "@/components/Contact";
+import Profile from "@/components/Profile";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import Portfolio from "@/components/Portfolio";
+import Project from "@/components/Project";
 import { useEffect } from "react";
 import styled from "styled-components";
+import ETC from '@/components/ETC';
 
 export default function Home() {
   useEffect(() => {
@@ -34,8 +35,9 @@ export default function Home() {
     <>
       <Main className="min-h-screen bg-black text-white">
         <Hero />
-        <Portfolio />
-        <Contact />
+        <Profile />
+        <Project />
+        <ETC />
         <Footer />
       </Main>
     </>

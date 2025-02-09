@@ -10,6 +10,9 @@ export default {
   theme: {
   	extend: {
   		colors: {
+			fontFamily: {
+				pretendard: "var(--font-pretendard)",
+			  },
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

@@ -1,17 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 import { TOKEN, DATABASE_ID } from "../config/index";
 import { Card, CardContent } from "./ui/card";
-import { Button } from "./ui/button";
 
-export default function Portfolio() {
-  const [selectedCategory, setSelectedCategory] = useState("all");
-
-  const categories = ["all", "digital", "paintings", "sculptures"];
-
+export default function Project() {
+  
   const works = [
     {
       id: 1,
@@ -51,28 +46,12 @@ export default function Portfolio() {
     },
   ];
 
-  const filteredWorks = works.filter((work) =>
-    selectedCategory === "all" ? true : work.category === selectedCategory
-  );
-
   return (
     <Section>
       <Container>
-        <ButtonGroup>
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              onClick={() => setSelectedCategory(category)}
-              className="text-sm capitalize"
-            >
-              {category}
-            </Button>
-          ))}
-        </ButtonGroup>
         <Grid layout>
           <AnimatePresence>
-            {filteredWorks.map((work) => (
+            {works.map((work) => (
               <motion.div
                 key={work.id}
                 layout
@@ -104,47 +83,7 @@ export default function Portfolio() {
   );
 }
 
-//빌드 타임에 호출
-export async function getStaticProps() {
-  const options = {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Notion-Version": "2025-02-05",
-      "content-type": "application/json",
-      Authorization: `Bearer ${TOKEN}`,
-    },
-    body: JSON.stringify({
-      sorts: [
-        {
-          property: "Work Period",
-          direction: "ascending",
-        },
-      ],
-      page_size: 100,
-    }),
-  };
-
-  const res = await fetch(
-    `https://api.notion.com/v1/databases/${DATABASE_ID}/query`,
-    options
-  );
-  console.log(res);
-  const projects = await res.json();
-
-  const projectNames = projects.results.map(
-    (aProject) => aProject.properties.Name.rich_text[0]?.plain_text
-  );
-
-  console.log(`projectNames : ${projectNames}`);
-
-  return {
-    props: { projects }, // will be passed to the page component as props
-  };
-}
-
 const Section = styled.section`
-  background-color: #82a0e8;
   padding: 5rem 0;
   height: 100vh;
 `;

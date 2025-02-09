@@ -2,6 +2,8 @@
 
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import Image from 'next/image';
+import ProfileImg from "../public/img/profile.jpg"
 
 export default function Contact() {
   return (
@@ -13,22 +15,28 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Title>Get in Touch</Title>
-          <Description>
-            Interested in collaborating or commissioning a piece? Let's create
-            something amazing together.
-          </Description>
+          <Title>Profile</Title>
         </TextWrapper>
+        <ProfileWrapper
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <Image src={ProfileImg} width={300} height={400}  alt="profile"/>
+          <div>
+            어쩌고
+          </div>
+        </ProfileWrapper>
       </Container>
     </ContactSection>
   );
 }
 
 const ContactSection = styled.section`
-  height: calc(100vh - 100px);
+  height: 100vh;
   position: relative;
   overflow: hidden;
-  background-color: #4fe4a1;
   padding: 5rem 0;
 `;
 
@@ -57,19 +65,7 @@ const Title = styled.h2`
   }
 `;
 
-const Description = styled.p`
-  margin-bottom: 2rem;
-  color: #9ca3af;
-`;
-
-const BackgroundLines = styled.div`
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  opacity: 0.3;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
+const ProfileWrapper = styled(motion.div)`
+  display: flex;
+  justify-content: between;
 `;
