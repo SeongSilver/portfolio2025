@@ -11,7 +11,6 @@ import Test from '@/components/Test';
 
 
 export default function HomePage({db}:any) {
-  console.log("샤발", db)
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout | null = null;
 

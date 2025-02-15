@@ -1,4 +1,4 @@
-
+'use client';
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -6,7 +6,7 @@ import ProfileImg from "../public/img/profile.jpg";
 import Mobile from "../public/img/mobile.svg";
 import Mail from "../public/img/mail.svg";
 
-export default function Contact() {
+export default function Profile() {
   return (
     <ContactSection>
       <Container>

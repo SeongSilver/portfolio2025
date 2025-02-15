@@ -1,8 +1,8 @@
+'use client'
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-export default function App() {
-
+export default function Hero() {
   return (
     <Container>
       <Content>

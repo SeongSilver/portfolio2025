@@ -1,9 +1,10 @@
+'use client'
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
 
-export default function Project1() {
-
+export default function Project1({db}:any) {
+console.log(db.results);
   return (
     <ContactSection>
       <Container>
@@ -21,7 +22,12 @@ export default function Project1() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-         d
+          <div>
+
+        {db.results.map((item, index)=> <div style={{marginBottom:"16px"}} key={index}>
+          {(item.properties.Name.rich_text[0].text.content)}
+        </div>)}
+          </div>
         </ProjectWrapper>
       </Container>
     </ContactSection>
@@ -29,6 +35,7 @@ export default function Project1() {
 }
 
 const ContactSection = styled.section`
+  width:100%;
   height: 100vh;
   position: relative;
   overflow: hidden;
