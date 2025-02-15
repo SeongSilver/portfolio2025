@@ -1,37 +1,76 @@
-"use client";
 
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import Image from 'next/image';
-import ProfileImg from "../public/img/profile.jpg"
+import Image from "next/image";
+import ProfileImg from "../public/img/profile.jpg";
+import Mobile from "../public/img/mobile.svg";
+import Mail from "../public/img/mail.svg";
 
 export default function Contact() {
   return (
     <ContactSection>
       <Container>
-        <TextWrapper
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <Title>Profile</Title>
-        </TextWrapper>
         <ProfileWrapper
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Image src={ProfileImg} width={300} height={400}  alt="profile"/>
-          <div>
-            이름 : 유성은<br/>
-            생년월일 : 1994.05.10<br/>
-            이메일 : yooseongeun@naver.com<br/>
-            깃허브 : https://github.com/SeongSilver<br/><br/>
+          <Image
+            src={ProfileImg}
+            width={300}
+            height={400}
+            alt="profile"
+            style={{ marginRight: "64px" }}
+          />
 
-            경력 : 디윅스 2023.04 ~ 현재
-          </div>
+          <ProfileCard>
+            <Title>YOO SEONG EUN</Title>
+            <div>
+              {" "}
+              <Image
+                src={Mobile}
+                width={24}
+                height={24}
+                alt="mobile"
+                style={{ marginRight: "4px" }}
+              />
+              010 · 4370 · 0743
+            </div>
+            <div>
+              {" "}
+              <Image
+                src={Mail}
+                width={24}
+                height={24}
+                alt="mail"
+                style={{ marginRight: "4px" }}
+              />
+              yooseongeun@naver.com
+            </div>
+          </ProfileCard>
+        </ProfileWrapper>
+        <ProfileWrapper
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <ProfileCard>
+            <div>학력/교육</div>
+            <div>· 2021.12 ~ 2022.06</div>
+            <div>멀티캠퍼스 지능형 개발 풀스택 교육 수료</div>
+            <div>· 2013.03 ~ 2020.08</div>
+            <div>가천대학교 졸업</div>
+          </ProfileCard>
+          <ProfileCard>
+            <div>경력</div>
+            <div>· 2023.04 ~ 재직중(1년 10개월)</div>
+            <div>디윅스 수행사업부 주임</div>
+          </ProfileCard>
+          <ProfileCard>
+            <div>역량</div>
+          </ProfileCard>
         </ProfileWrapper>
       </Container>
     </ContactSection>
@@ -42,7 +81,7 @@ const ContactSection = styled.section`
   height: 100vh;
   position: relative;
   overflow: hidden;
-  padding: 5rem 0;
+  padding: 4rem 0;
 `;
 
 const Container = styled.div`
@@ -74,5 +113,22 @@ const ProfileWrapper = styled(motion.div)`
   margin-top: 10%;
   display: flex;
   justify-content: between;
-  gap: 32px;
+  margin-bottom: 5rem;
+`;
+
+const ProfileCard = styled.div`
+  width: 100%;
+  > div {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+  }
+  div: first-child {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  div:nth-child(2) {
+    line-height: 24px;
+  }
 `;
