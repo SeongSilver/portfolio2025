@@ -70,6 +70,7 @@ export default function Contact() {
           </ProfileCard>
           <ProfileCard>
             <div>역량</div>
+            <div>React, Next.js, styled-components, TypeScript</div>
           </ProfileCard>
         </ProfileWrapper>
       </Container>
@@ -81,7 +82,6 @@ const ContactSection = styled.section`
   height: 100vh;
   position: relative;
   overflow: hidden;
-  padding: 4rem 0;
 `;
 
 const Container = styled.div`

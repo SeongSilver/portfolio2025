@@ -1,11 +1,9 @@
-"use client";
-
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import Image from 'next/image';
-import ProfileImg from "../public/img/profile.jpg"
+
 
 export default function Project1() {
+
   return (
     <ContactSection>
       <Container>

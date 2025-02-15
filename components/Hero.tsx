@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 export default function App() {
+
   return (
     <Container>
       <Content>
@@ -10,7 +11,7 @@ export default function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          2년차 프론트엔드 개발자
+          프론트엔드 개발자
           <br /> 유성은입니다
         </Title>
         <Subtitle
@@ -18,8 +19,8 @@ export default function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          React와 TypeScript를 기반으로 국가 SI 프로젝트, 애플리케이션 개발,<br/> 솔루션 UI/UX 설계 등 다양한 경험을 쌓아왔습니다.<br/>
-          스타트업 환경에서 기획자, 디자이너, 백엔드 개발자, 고객과 긴밀히 협력하며<br/> 원활한 소통을 통해 프로젝트의 완성도와 사용자 만족도를 높이는 데 주력하고 있습니다.
+          <p>2년 차 프론트엔드 개발자로, React와 TypeScript를 기반으로 다양한 프로젝트를 경험해왔습니다.<br/> 대규모 SI 국가 프로젝트와 웹앱 서비스를 시작부터 끝까지 개발하는 과정속에서 성공과 실패를 반복하며 성장중입니다.</p><br/>
+          <p></p>
         </Subtitle>
       </Content>
     </Container>
