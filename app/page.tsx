@@ -6,6 +6,7 @@ import Project from "@/components/Project";
 import { useEffect } from "react";
 import styled from "styled-components";
 import ETC from '@/components/ETC';
+import Project1 from '@/components/Project1';
 
 export default function Home() {
   useEffect(() => {
@@ -36,7 +37,8 @@ export default function Home() {
       <Main className="min-h-screen bg-black text-white">
         <Hero />
         <Profile />
-        <Project />
+        <Project1 />
+        {/* <Project /> */}
         <ETC />
         <Footer />
       </Main>

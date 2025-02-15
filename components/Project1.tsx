@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from 'next/image';
 import ProfileImg from "../public/img/profile.jpg"
 
-export default function Contact() {
+export default function Project1() {
   return (
     <ContactSection>
       <Container>
@@ -15,24 +15,16 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Title>Profile</Title>
+          <Title>Project</Title>
         </TextWrapper>
-        <ProfileWrapper
+        <ProjectWrapper
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Image src={ProfileImg} width={300} height={400}  alt="profile"/>
-          <div>
-            이름 : 유성은<br/>
-            생년월일 : 1994.05.10<br/>
-            이메일 : yooseongeun@naver.com<br/>
-            깃허브 : https://github.com/SeongSilver<br/><br/>
-
-            경력 : 디윅스 2023.04 ~ 현재
-          </div>
-        </ProfileWrapper>
+         d
+        </ProjectWrapper>
       </Container>
     </ContactSection>
   );
@@ -70,7 +62,7 @@ const Title = styled.h2`
   }
 `;
 
-const ProfileWrapper = styled(motion.div)`
+const ProjectWrapper = styled(motion.div)`
   margin-top: 10%;
   display: flex;
   justify-content: between;

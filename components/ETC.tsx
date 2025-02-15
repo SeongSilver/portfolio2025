@@ -13,7 +13,7 @@ export default function ETC() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Title>Profile</Title>
+          <Title>ETC</Title>
           <Description>
             Interested in collaborating or commissioning a piece? Let's create
             something amazing together.
