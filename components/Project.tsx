@@ -2,95 +2,9 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-import { TOKEN, DATABASE_ID } from "../config/index";
 import { Card, CardContent } from "./ui/card";
-import { Client } from '@notionhq/client';
-import { useEffect } from 'react';
-
-
-const notionToken = process.env.NOTION_TOKEN;
-const notionDatabaseId = process.env.DATABASE_ID;
-
-const notion = new Client({ auth:notionToken});
-
-
-export async function getPosts() {
-  const response = await notion.databases.query({
-    database_id: notionDatabaseId as string,
-    filter: {
-      property: "상태",
-      status: {
-        equals: "공개",
-      },
-    },
-    sorts: [
-      {
-        property: "날짜",
-        direction: "descending",
-      },
-    ],
-  });
-
-  return response.results;
-}
-
-export async function getDatabaseTags() {
-  const response = await notion.databases.retrieve({
-    database_id: notionDatabaseId as string,
-  });
-
- return response;
-}
-
 
 export default function Project() {
-  alert(TOKEN);
-  alert(DATABASE_ID);
-  useEffect(() => {
-    const abc = getPosts();
-    const abc1 = getDatabaseTags();
-    console.log(abc);
-    console.log(abc1)
-  },[])
-  const works = [
-    {
-      id: 1,
-      title: "Digital Dreamscape",
-      category: "digital",
-      year: "2024",
-    },
-    {
-      id: 2,
-      title: "Abstract Harmony",
-      category: "paintings",
-      year: "2023",
-    },
-    {
-      id: 3,
-      title: "Metal Flow",
-      category: "sculptures",
-      year: "2024",
-    },
-    {
-      id: 4,
-      title: "Neon Nights",
-      category: "digital",
-      year: "2023",
-    },
-    {
-      id: 5,
-      title: "Nature's Whisper",
-      category: "paintings",
-      year: "2024",
-    },
-    {
-      id: 6,
-      title: "Bronze Echo",
-      category: "sculptures",
-      year: "2023",
-    },
-  ];
-
   return (
     <Section>
       <Container>
