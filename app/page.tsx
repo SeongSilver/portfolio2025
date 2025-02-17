@@ -15,16 +15,9 @@ export default async function Home() {
     database_id: process.env.NOTION_DATABASE_ID,
   });
  
-  console.log(db);
- 
-  console.log(db.results);
- 
-  return <main>    
-    <Hero />
-  <Profile />
-  <Project1 db={db} />
-  <ETC />
-  <Footer />
-
-  </main>;
+  return (
+    <main>    
+      <HomePage db={db} />
+    </main>
+  );
 }

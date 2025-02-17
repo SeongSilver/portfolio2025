@@ -5,13 +5,13 @@ import Hero from "@/components/Hero";
 import { useEffect } from "react";
 import styled from "styled-components";
 import ETC from '@/components/ETC';
-import Project1 from '@/components/Project1';
-import Test from '@/components/Test';
-
-
+import Project from '@/components/Project';
 
 export default function HomePage({db}:any) {
   useEffect(() => {
+    if(typeof window !== undefined){
+
+    
     let scrollTimeout: NodeJS.Timeout | null = null;
 
     const handleWheel = (event: WheelEvent) => {
@@ -32,6 +32,7 @@ export default function HomePage({db}:any) {
     window.addEventListener("wheel", handleWheel, { passive: false });
 
     return () => window.removeEventListener("wheel", handleWheel);
+  }
   }, []);
 
   return (
@@ -39,11 +40,10 @@ export default function HomePage({db}:any) {
       <Main className="min-h-screen bg-black text-white">
         <Hero />
         <Profile />
-        <Project1 />
+        <Project db={db}/>
         {/* <Project /> */}
         <ETC />
         <Footer />
-        <Test/>
       </Main>
     </>
   );

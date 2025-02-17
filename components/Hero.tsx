@@ -19,8 +19,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <p>2년 차 프론트엔드 개발자로, React와 TypeScript를 기반으로 다양한 프로젝트를 경험해왔습니다.<br/> 대규모 SI 국가 프로젝트와 웹앱 서비스를 시작부터 끝까지 개발하는 과정속에서 성공과 실패를 반복하며 성장중입니다.</p><br/>
-          <p></p>
+          <div>2년 차 프론트엔드 개발자로, React와 TypeScript를 기반으로 다양한 프로젝트를 경험해왔습니다.<br/> 대규모 SI 국가 프로젝트와 웹앱 서비스를 시작부터 끝까지 개발하는 과정속에서 성공과 실패를 반복하며 성장중입니다.</div><br/>
+          <div></div>
         </Subtitle>
       </Content>
     </Container>
@@ -61,7 +61,7 @@ const Title = styled(motion.h1)`
   }
 `;
 
-const Subtitle = styled(motion.p)`
+const Subtitle = styled(motion.div)`
   max-width: 1000px;
   font-size: 1.125rem;
   color: #9ca3af; // Tailwind의 text-gray-400
