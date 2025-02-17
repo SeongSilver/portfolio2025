@@ -5,8 +5,19 @@ import Image from "next/image";
 import ProfileImg from "../public/img/profile.jpg";
 import Mobile from "../public/img/mobile.svg";
 import Mail from "../public/img/mail.svg";
+import { useEffect, useState } from 'react';
 
 export default function Profile() {
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() =>{
+
+    if(typeof window !== undefined){
+      setIsMobile(window.innerWidth<=480 ? true : false)
+    }
+
+  },[])
+
   return (
     <ContactSection>
       <Container>
@@ -18,8 +29,8 @@ export default function Profile() {
         >
           <Image
             src={ProfileImg}
-            width={300}
-            height={400}
+            width={isMobile? 210:300}
+            height={isMobile? 280:400}
             alt="profile"
             style={{ marginRight: "64px" }}
           />
@@ -114,6 +125,11 @@ const ProfileWrapper = styled(motion.div)`
   display: flex;
   justify-content: between;
   margin-bottom: 5rem;
+  
+  @media screen and (max-width: 480px) {
+flex-direction: column;
+text-align:center;
+  }
 `;
 
 const ProfileCard = styled.div`
@@ -123,12 +139,17 @@ const ProfileCard = styled.div`
     display: flex;
     align-items: center;
   }
-  div: first-child {
+  >div: first-child {
     font-size: 1.2rem;
     font-weight: 700;
   }
 
   div:nth-child(2) {
     line-height: 24px;
+  }
+    
+  @media screen and (max-width: 480px) {
+flex-direction: column;
+text-align:center;
   }
 `;

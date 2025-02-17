@@ -41,7 +41,6 @@ export default function HomePage({db}:any) {
         <Hero />
         <Profile />
         <Project db={db}/>
-        {/* <Project /> */}
         <ETC />
         <Footer />
       </Main>
