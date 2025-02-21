@@ -38,10 +38,10 @@ const Overlay = styled.div`
 
 const ModalWrapper = styled.div`
   background: white;
+  color:black;
   padding: 20px;
   width: 80%;
   height:80%;
-  border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease-in-out;
   position: relative;
@@ -59,11 +59,12 @@ const ModalWrapper = styled.div`
 `;
 
 const CloseButton = styled.button`
+color:#c6c6c6;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0px;
+  right: 20px;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 36px;
   cursor: pointer;
 `;

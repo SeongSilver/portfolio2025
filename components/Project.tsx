@@ -2,14 +2,35 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from './ui/Modal';
-
+import Slider from 'react-slick';
+import { projectTraceSource } from 'next/dist/build/swc/generated-native';
 
 export default function Project({db}:any) {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [projectInfo, setProjectInfo] = useState<any>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      autoplay: true, 
+      autoplaySpeed: 1300,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      afterChange: (current: number) => setCurrentSlide(current),
+  };
   console.log(db);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return ;
+  },[])
+
+  const changeBr = (text:string) => {
+
+  }
 
   if(!db){
     return <>데이터가 없음</>
@@ -35,52 +56,58 @@ export default function Project({db}:any) {
           {db.results.map((item: any, index: number) => (
               <ProjectCard style={{ marginBottom: "16px" }} key={index} onClick={() => {
                 setIsModal(true);
-                setProjectInfo(item)
+                setProjectInfo(item.properties);
               }}>
                 <Image
-                          src={item.cover?.file.url}
-                          alt={item.id}
-                          fill
-                          objectFit="contain"
-                          />
-                          <div style={{position:"absolute", top:"80%", left:"50%", transform:"translate(-50%, -50%)", textAlign:"center",  fontWeight:"600"}}>
-
-                          {item.properties.Name.rich_text[0]?.text.content}<br/>
-                          {item.properties.projectYear.rich_text[0]?.text.content}
-                          </div>
-                {/* {JSON.stringify(item.properties.siteImage)} */}
-                {/* <>
-                  {item.properties?.siteImage?.files.map(
-                    (image: any, idx: number) => (
-                      <div key={idx} >
-                        <Image
-                          src={image.file.url}
-                          alt={image.file.name}
-                          fill
-                        />
-                      </div>
-                    )
-                  )}
-                </> */}
+                  src={item.cover?.file.url}
+                  alt={item.id}
+                  fill
+                  objectFit="contain"
+                />
+                <div style={{position:"absolute", top:"80%", left:"50%", transform:"translate(-50%, -50%)", textAlign:"center",  fontWeight:"600"}}>
+                  {item.properties.Name.rich_text[0]?.text.content}<br/>
+                  [{item.properties.projectYear.rich_text[0]?.text.content}]
+                </div>
               </ProjectCard>
             ))}
         </ProjectWrapper>
       </Container>
       {
         isModal && <Modal isOpen={isModal} onClose={() => setIsModal(false)}>
+          <ProjectInfo>
+            <div style={{display:"flex", gap:"8px", alignItems:"center"}}>
+            <span style={{fontSize:"1.5rem", fontWeight:"700"}}>{projectInfo.Name.rich_text[0]?.text.content}</span>
+              {`[${projectInfo.workPeriod?.date?.start} ~ ${projectInfo.workPeriod?.date?.end}]`}
+            </div>
+            <div style={{ fontSize:"1.1rem", fontWeight:"700", whiteSpace: "pre-line" }}>{projectInfo.description.rich_text[0].text.content}</div>
+          </ProjectInfo>
           <ProjectDetail>
-                  {projectInfo.properties?.siteImage?.files.map(
-                    (image: any, idx: number) => (
-                      <div key={idx} >
-                        <Image
-                          src={image.file.url}
-                          alt={image.file.name}
-                          fill
-                        />
-                      </div>
-                    )
-                  )}
-                </ProjectDetail>
+            <div>
+              <div>
+                <span style={{fontSize:"1.2rem", fontWeight:"700"}}>주요 기능</span>
+                <div style={{ whiteSpace: "pre-line" }}>
+                  {projectInfo.description.rich_text[0].text.content}
+                </div>
+              </div>
+              <div style={{marginTop:"32px"}}>
+                <span style={{ fontSize:"1.2rem", fontWeight:"700"}}>담당한 역할과 기능</span>
+                <div style={{ whiteSpace: "pre-line" }}>
+                  {projectInfo.content.rich_text[0].text.content}
+                </div>
+              </div>
+          </div>
+            <div>
+              {projectInfo.siteImage.files.length > 0 && projectInfo.siteImage.files.map((item, index) => <div key={index} style={{position:"relative", width:"100%", height:"100%", display:"flex", flexDirection:"row", gap:"16px", overflowX:"scroll"}}>
+                <Image
+                  src={item.file.url}
+                  alt={item.name}
+                  fill
+                  style={{ objectFit: "contain" }}
+                />
+              </div>)}
+            </div>
+          </ProjectDetail>
+         
         </Modal>
       }
     </ContactSection>
@@ -137,8 +164,6 @@ const ProjectCard = styled.div`
   /* overflow-x: scroll; */
   background-color: #efefef;
   color: #efefef;
-  border:2px solid #efefef;
-  border-radius:20px;
   position:relative;
   cursor:pointer;
   img{
@@ -146,8 +171,7 @@ const ProjectCard = styled.div`
     object-fit: contain;
   }
   &:hover{
-    border:2px solid #c6c6c6;
-    background-color:#282828;
+    background-color:#444444;
     transition:all 0.2s ease-in-out;
   }
   @media screen and (max-width: 480px) {
@@ -155,12 +179,24 @@ height:20vh;
   }
 `;
 
-const ProjectDetail = styled.div`
-  width:100%;
+const ProjectInfo = styled.div`
+  width: 100%;
+  height:20%;
+  margin-bottom:16px;
   display: flex;
-  overflow:scroll;
-  img{
-    padding:4rem;
-    object-fit: contain;
+  flex-direction: column;
+  justify-content: space-around;
+`;
+const ProjectDetail = styled.div`
+  padding:16px 0;
+  width: 100%;
+  height:calc(75% - 16px);
+  display: flex;
+  gap: 16px;
+  >div:first-child{
+    width:40%;
+  }
+  >div:last-child{
+    width:60%;
   }
 `;
