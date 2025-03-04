@@ -41,7 +41,7 @@ export default function HomePage({db}:any) {
         <Hero />
         <Profile />
         <Project db={db}/>
-        <ETC />
+        {/* <ETC /> */}
         <Footer />
       </Main>
     </>
@@ -51,5 +51,5 @@ export default function HomePage({db}:any) {
 const Main = styled.main`
   min-height: 100vh;
   background-color: black;
-  color: white;
+  color: #dfdfdf;
 `;

@@ -1,10 +1,5 @@
 import { notionDatabase } from '@/lib/notion';
 import HomePage from './HomePage';
-import Project1 from '@/components/Project1';
-import ETC from '@/components/ETC';
-import Hero from '@/components/Hero';
-import Profile from '@/components/Profile';
-import Footer from '@/components/Footer';
  
 export default async function Home() {
 

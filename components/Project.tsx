@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from './ui/Modal';
 import Slider from 'react-slick';
 import { projectTraceSource } from 'next/dist/build/swc/generated-native';
@@ -66,7 +66,7 @@ export default function Project({db}:any) {
                 />
                 <div style={{position:"absolute", top:"80%", left:"50%", transform:"translate(-50%, -50%)", textAlign:"center",  fontWeight:"600"}}>
                   {item.properties.Name.rich_text[0]?.text.content}<br/>
-                  [{item.properties.projectYear.rich_text[0]?.text.content}]
+                  {item.properties.projectYear.rich_text[0]?.text.content}
                 </div>
               </ProjectCard>
             ))}
@@ -74,37 +74,48 @@ export default function Project({db}:any) {
       </Container>
       {
         isModal && <Modal isOpen={isModal} onClose={() => setIsModal(false)}>
-          <ProjectInfo>
-            <div style={{display:"flex", gap:"8px", alignItems:"center"}}>
-            <span style={{fontSize:"1.5rem", fontWeight:"700"}}>{projectInfo.Name.rich_text[0]?.text.content}</span>
-              {`[${projectInfo.workPeriod?.date?.start} ~ ${projectInfo.workPeriod?.date?.end}]`}
-            </div>
-            <div style={{ fontSize:"1.1rem", fontWeight:"700", whiteSpace: "pre-line" }}>{projectInfo.description.rich_text[0].text.content}</div>
-          </ProjectInfo>
+    
           <ProjectDetail>
             <div>
+            <div style={{display:"flex", flexDirection:"column", gap:"8px", alignItems:"center"}}>
+            <div style={{fontSize:"1.5rem", fontWeight:"700", display:"flex", alignItems:"center", gap:"8px"}}>{projectInfo.Name.rich_text[0]?.text.content}<span style={{ fontSize:"1rem", fontWeight:400}}>{`[${projectInfo.workPeriod?.date?.start} ~ ${projectInfo.workPeriod?.date?.
+                end}]`}</span></div>
+              
+                 <div style={{textAlign:"center", fontSize:"1.1rem", fontWeight:"700", whiteSpace: "pre-line" }}>{projectInfo.description.rich_text[0].text.content}</div>
+            </div>
+           
+              <div>
+                <span style={{fontSize:"1.2rem", fontWeight:"700"}}>사용기술</span>
+                <div style={{ whiteSpace: "pre-line" }}>
+                  {projectInfo.Tag.multi_select.map((item, index) => <span key={item.id}>{`${item.name}${index === projectInfo.Tag.multi_select.length-1 ? "":", "}`}</span>)}
+                </div>
+              </div>
               <div>
                 <span style={{fontSize:"1.2rem", fontWeight:"700"}}>주요 기능</span>
                 <div style={{ whiteSpace: "pre-line" }}>
                   {projectInfo.description.rich_text[0].text.content}
                 </div>
               </div>
-              <div style={{marginTop:"32px"}}>
+              <div >
                 <span style={{ fontSize:"1.2rem", fontWeight:"700"}}>담당한 역할과 기능</span>
-                <div style={{ whiteSpace: "pre-line" }}>
-                  {projectInfo.content.rich_text[0].text.content}
+                <div style={{ height:"50%", whiteSpace: "pre-line", overflowY:"scroll" }}>
+                  {projectInfo.working.rich_text[0].text.content}
                 </div>
               </div>
           </div>
-            <div>
-              {projectInfo.siteImage.files.length > 0 && projectInfo.siteImage.files.map((item, index) => <div key={index} style={{position:"relative", width:"100%", height:"100%", display:"flex", flexDirection:"row", gap:"16px", overflowX:"scroll"}}>
+            <div style={{margin:"5% 3% 0 3%", overflow:"scroll", display:"flex", gap:"16px", height:"80%"}}>
+              {projectInfo.siteImage.files.length > 0 && projectInfo.siteImage.files.map((item:any, index:number) =>
+              <div key={index} style={{width:"100%", display:"flex", flexDirection:"column", position:"relative"}}>
                 <Image
                   src={item.file.url}
                   alt={item.name}
                   fill
-                  style={{ objectFit: "contain" }}
+                  style={{objectFit:"contain"}}
+
                 />
-              </div>)}
+                {item.name.split(".")[0]}
+                </div>
+              )}
             </div>
           </ProjectDetail>
          
@@ -185,18 +196,34 @@ const ProjectInfo = styled.div`
   margin-bottom:16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  gap:16px;
 `;
 const ProjectDetail = styled.div`
   padding:16px 0;
   width: 100%;
-  height:calc(75% - 16px);
+  height:100%;
   display: flex;
   gap: 16px;
   >div:first-child{
+    margin-top:2%;
     width:40%;
+    display:flex;
+    flex-direction: column;
+    gap:32px;
+    @media screen and (max-width: 480px) {
+    width:100%;
+    }
   }
   >div:last-child{
     width:60%;
+    @media screen and (max-width: 480px) {
+    width:100%;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    overflow-y:scroll;
+    overflow-x:hidden;
+  flex-direction: column;
   }
 `;
